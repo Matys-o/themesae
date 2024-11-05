@@ -28,170 +28,805 @@ body {
     justify-content: space-between;
 }
 
-.logo img {
-    width: 40px;
-    height: auto;
-}
-
-.main-navigation {
-    display: none;
-}
-
-.menu-toggle {
-    background: none;
-    border: none;
-    color: #ffa500;
-    font-size: 1.5em;
-    cursor: pointer;
-}
-
-.hero-section {
+/* Section Hero */
+.tournois-header {
     text-align: center;
     padding: 1.5em 1em;
-    background-image: url('<?php echo get_template_directory_uri(); ?>/images/hero-image.png');
-    background-size: cover;
-    background-position: center;
 }
 
-.hero-section h1 {
-    color: #ffffff;
+.tournois-hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.tournois-intro h2 {
     font-size: 1.8em;
     margin: 0.5em 0;
+    color: #ffd700;
 }
 
-.hero-buttons .button {
-    background-color: #ffa500;
+.tournois-intro .description {
+    color: #cccccc;
+    font-size: 1em;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.buttons .btn {
+    background-color: #ffd700;
     color: #000;
     padding: 0.5em 1em;
     margin: 0.5em;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
-    display: block;
-    width: 80%;
-    margin: 0.5em auto;
+    display: inline-block;
 }
 
-.hero-buttons .button.secondary {
-    background-color: #333333;
-    color: #ffffff;
-}
-
-.about-section {
-    text-align: center;
-    margin: 1.5em 1em;
-    color: #ffffff;
-    font-size: 0.9em;
-}
-
-.tournaments-section {
-    padding: 1em;
-    text-align: center;
-    color: #ffffff;
-}
-
-.tournaments-section h2 {
-    color: #ffa500;
+/* Section des tournois en cours */
+.current-tournaments h3 {
+    color: #ffd700;
     font-size: 1.5em;
-    margin-bottom: 1em;
+    text-align: center;
+    margin-top: 1em;
+}
+
+.tournament-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em;
 }
 
 .tournament-card {
     background-color: #222222;
     border-radius: 8px;
-    padding: 1em;
-    margin: 1em 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 250px;
-    text-align: left;
+    overflow: hidden;
+    width: 220px;
+    text-align: center;
     color: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.tournament-card:hover {
+    transform: scale(1.05);
 }
 
 .tournament-card img {
     width: 100%;
-    border-radius: 5px;
+    height: 140px;
+    object-fit: cover;
 }
 
-.tournament-card h3 {
+.tournament-info h4 {
     font-size: 1.2em;
-    margin-top: 0.5em;
+    color: #ffd700;
+    margin: 0.5em 0;
 }
 
-.tournament-card p {
-    margin: 0.5em 0;
+.tournament-info p {
+    margin: 0.3em 0;
     color: #cccccc;
 }
 
-.tournament-card button,
-.stream-button {
-    display: block;
-    width: 100%;
-    padding: 0.5em;
-    border: none;
-    border-radius: 5px;
+.tag {
+    background-color: #ffd700;
+    color: #000;
+    padding: 0.2em 0.5em;
+    border-radius: 3px;
+    font-size: 0.8em;
+}
+
+.create-tournament-page {
+    max-width: 600px;
+    margin: 2em auto;
+    padding: 1.5em;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+.create-tournament-page h2 {
     text-align: center;
+    color: #ffd700;
+}
+
+fieldset {
+    border: 1px solid #444444;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 8px;
+}
+
+legend {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+label {
+    display: block;
     margin-top: 0.5em;
 }
 
-.stream-button {
-    background-color: #1e90ff;
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="file"] {
+    width: 100%;
+    padding: 0.5em;
+    margin-top: 0.5em;
+    background-color: #333333;
     color: #ffffff;
-    text-decoration: none;
+    border: 1px solid #555555;
+    border-radius: 5px;
 }
 
-.footer-content {
-    background-color: #000000;
+.btn.submit-tournament {
+    display: block;
+    width: 100%;
+    background-color: #ffd700;
+    color: #000;
+    font-weight: bold;
+    padding: 0.7em;
+    margin-top: 1em;
     text-align: center;
-    padding: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.footer-navigation ul {
+.btn.submit-tournament:hover {
+    background-color: #e0c700;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .tournament-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tournament-card {
+        width: 90%;
+    }
+}
+
+/* Styles pour la table de classement */
+.ranking-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.ranking-page th, .ranking-page td {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.ranking-page tr:hover {
+    background-color: #444;
+    cursor: pointer;
+}
+
+/* Styles pour la carte de détails de l'équipe */
+.team-details-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    z-index: 1000;
+}
+
+.team-details-content img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.team-details-content h3 {
+    margin: 10px 0;
+}
+
+.team-details-content ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+}
+
+.team-details-content ul li {
+    margin: 5px 0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #FFC107;
+}
+
+/* Section des cartes de tournois */
+.tournament-cards {
     display: flex;
-    flex-direction: column;
-    gap: 0.5em;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.footer-navigation a {
-    color: #ffffff;
+.tournament-card {
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: #fff;
+}
+
+.tournament-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.tournament-info {
+    padding: 15px;
+}
+
+.tournament-info h4 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #FFC107;
+}
+
+.tournament-info p {
+    margin: 5px 0;
+    color: #ddd;
+}
+
+.btn {
+    background-color: #FFC107;
+    color: #000;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
     text-decoration: none;
-    font-size: 0.9em;
+    display: inline-block;
+    margin-top: 10px;
 }
 
-.footer-content p {
-    color: #777777;
-    font-size: 0.8em;
+.btn:hover {
+    background-color: #FFD54F;
+}
+
+/* Formulaire d'inscription */
+.join-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 300px;
+    z-index: 1000;
+}
+
+.join-form h4 {
+    color: #FFC107;
+    text-align: center;
+}
+
+.join-form label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #ddd;
+}
+
+.join-form input[type="text"],
+.join-form input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.join-form .btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.cancel-join {
+    background-color: #666;
+    margin-top: 5px;
+}
+
+.cancel-join:hover {
+    background-color: #888;
+}
+
+.user-account-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #ffffff;
+}
+
+.user-account-page h2 {
+    text-align: center;
+    color: #FFC107;
+    font-size: 2em;
+}
+
+.profile-picture {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.profile-image {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    border: 4px solid #FFC107;
+    object-fit: cover;
+}
+
+form fieldset {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #FFC107;
+}
+
+form input[type="text"],
+form input[type="file"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #222;
+    color: #ffffff;
+}
+
+.btn.save-profile {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #FFC107;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.btn.save-profile:hover {
+    background-color: #ffdd57;
+}
+
+.user-stats {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.user-stats h3 {
+    color: #FFC107;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.user-stats p {
+    font-size: 1.1em;
+    margin: 8px 0;
+    color: #ffffff;
+}
+
+.login-page {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.login-page h2 {
+    color: #FFC107;
+    font-size: 2em;
+}
+
+.error-message {
+    color: #ff5555;
+    margin-bottom: 15px;
+}
+
+.login-page label {
+    display: block;
+    margin-top: 15px;
+    color: #FFC107;
+    text-align: left;
+}
+
+.login-page input[type="text"],
+.login-page input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #222;
+    color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 4px;
+}
+
+.login-page .btn.login-btn {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #FFC107;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+
+.register-link {
+    margin-top: 20px;
+    color: #ccc;
+}
+
+.register-link a {
+    color: #FFC107;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+
+/* Styles pour la page Mentions Légales */
+.legal-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #121212; /* Couleur de fond sombre */
+    color: #f0f0f0; /* Texte clair pour le contraste */
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.legal-page h2 {
+    font-size: 2em;
+    color: #FFC107; /* Couleur jaune pour le titre principal */
+    text-align: center;
+    margin-bottom: 1em;
+    border-bottom: 2px solid #FFC107;
+    padding-bottom: 10px;
+}
+
+.legal-page section h3 {
+    font-size: 1.5em;
+    color: #ffffff; /* Couleur blanche pour les sous-titres */
+    margin-top: 1.5em;
+    border-left: 4px solid #FFC107; /* Barre de style à gauche des sous-titres */
+    padding-left: 10px;
+}
+
+.legal-page h4 {
+    font-size: 1.2em;
+    color: #b8b8b8; /* Couleur gris clair pour les sections internes */
     margin-top: 1em;
 }
 
-@media (min-width: 768px) {
-    .main-navigation {
-        display: flex;
-        gap: 1em;
+.legal-page p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 1em;
+    color: #e0e0e0;
+}
+
+.legal-page ul {
+    list-style-type: disc;
+    margin: 1em 0 1em 1.5em;
+    padding-left: 1em;
+}
+
+.legal-page ul li {
+    font-size: 1em;
+    color: #e0e0e0;
+    margin-bottom: 0.5em;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .legal-page {
+        padding: 20px 15px;
     }
 
-    .menu-toggle {
-        display: none;
+    .legal-page h2 {
+        font-size: 1.8em;
     }
 
-    .tournament-card {
-        width: 45%;
-        margin: 1em;
+    .legal-page section h3 {
+        font-size: 1.4em;
     }
 
-    .footer-navigation ul {
-        flex-direction: row;
-        justify-content: center;
+    .legal-page h4 {
+        font-size: 1.1em;
     }
 }
 
-@media (min-width: 1024px) {
-    .tournament-card {
-        width: 30%;
+
+/* Styles pour la page Politique de Confidentialité */
+.legal-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #121212;
+    color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.legal-page h2 {
+    font-size: 2em;
+    color: #FFC107;
+    text-align: center;
+    margin-bottom: 1em;
+    border-bottom: 2px solid #FFC107;
+    padding-bottom: 10px;
+}
+
+.legal-page section h3 {
+    font-size: 1.5em;
+    color: #ffffff;
+    margin-top: 1.5em;
+    border-left: 4px solid #FFC107;
+    padding-left: 10px;
+}
+
+.legal-page ul {
+    list-style-type: disc;
+    margin: 1em 0 1em 1.5em;
+    padding-left: 1em;
+}
+
+.legal-page ul li {
+    color: #e0e0e0;
+    margin-bottom: 0.5em;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .legal-page {
+        padding: 20px 15px;
+    }
+
+    .legal-page h2 {
+        font-size: 1.8em;
+    }
+
+    .legal-page section h3 {
+        font-size: 1.4em;
+    }
+}
+
+/* Styles pour la page des CGU */
+.legal-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #121212;
+    color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.legal-page h2 {
+    font-size: 2em;
+    color: #FFC107;
+    text-align: center;
+    margin-bottom: 1em;
+    border-bottom: 2px solid #FFC107;
+    padding-bottom: 10px;
+}
+
+.legal-page section h3 {
+    font-size: 1.5em;
+    color: #ffffff;
+    margin-top: 1.5em;
+    border-left: 4px solid #FFC107;
+    padding-left: 10px;
+}
+
+.legal-page ul {
+    list-style-type: disc;
+    margin: 1em 0 1em 1.5em;
+    padding-left: 1em;
+}
+
+.legal-page ul li {
+    color: #e0e0e0;
+    margin-bottom: 0.5em;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .legal-page {
+        padding: 20px 15px;
+    }
+
+    .legal-page h2 {
+        font-size: 1.8em;
+    }
+
+    .legal-page section h3 {
+        font-size: 1.4em;
+    }
+}
+
+/* Styles pour la page FAQ */
+.faq-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #121212;
+    color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.faq-page h2 {
+    font-size: 2em;
+    color: #FFC107;
+    text-align: center;
+    margin-bottom: 1em;
+    border-bottom: 2px solid #FFC107;
+    padding-bottom: 10px;
+}
+
+.faq-page section h3 {
+    font-size: 1.5em;
+    color: #ffffff;
+    margin-top: 1.5em;
+    border-left: 4px solid #FFC107;
+    padding-left: 10px;
+}
+
+.faq-page p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 1em;
+    color: #e0e0e0;
+}
+
+.faq-page p strong {
+    color: #FFC107;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .faq-page {
+        padding: 20px 15px;
+    }
+
+    .faq-page h2 {
+        font-size: 1.8em;
+    }
+
+    .faq-page section h3 {
+        font-size: 1.4em;
+    }
+}
+
+/* Styles pour la page de contact */
+.contact-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #121212;
+    color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.contact-page h2 {
+    font-size: 2em;
+    color: #FFC107;
+    text-align: center;
+    margin-bottom: 1em;
+    border-bottom: 2px solid #FFC107;
+    padding-bottom: 10px;
+}
+
+.contact-page p {
+    font-size: 1em;
+    margin-bottom: 1.5em;
+    text-align: center;
+    color: #e0e0e0;
+}
+
+.contact-page form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-page label {
+    font-size: 1em;
+    color: #f0f0f0;
+    margin-bottom: 5px;
+}
+
+.contact-page input[type="text"],
+.contact-page input[type="email"],
+.contact-page textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    background-color: #1c1c1c;
+    color: #ffffff;
+}
+
+.contact-page button {
+    background-color: #FFC107;
+    color: #000;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.contact-page button:hover {
+    background-color: #ffa500;
+}
+
+.success-message {
+    color: #00ff00;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.error-message {
+    color: #ff0000;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .contact-page {
+        padding: 20px 15px;
+    }
+
+    .contact-page h2 {
+        font-size: 1.8em;
     }
 }

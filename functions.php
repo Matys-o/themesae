@@ -111,5 +111,24 @@ function create_custom_post_type_tournois() {
 add_action('init', 'create_custom_post_type_tournois');
 
 
+function restrict_access_to_logged_in_users() {
+    // Liste des pages accessibles sans connexion (comme la page de connexion ou d'inscription)
+    $accessible_pages = ['connexion', 'inscription'];
+
+    // Vérifie si l'utilisateur est connecté
+    if (!is_user_logged_in()) {
+        // Récupère le slug de la page actuelle
+        global $post;
+        $current_page_slug = isset($post->post_name) ? $post->post_name : '';
+
+        // Si l'utilisateur n'est pas sur une page accessible, le redirige vers la page de connexion
+        if (!in_array($current_page_slug, $accessible_pages)) {
+            wp_redirect(home_url('/connexion')); // Remplace 'connexion' par le slug de votre page de connexion
+            exit;
+        }
+    }
+}
+add_action('template_redirect', 'restrict_access_to_logged_in_users');
+
 
 ?>
