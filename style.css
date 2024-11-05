@@ -1,0 +1,197 @@
+/*
+Theme Name: NRLT Tournois
+Theme URI: https://example.com/nrlt-tournois
+Author: Matys Ouvrard
+Author URI: https://example.com
+Description: Thème WordPress pour les tournois Rocket League.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: nrlt-tournois
+*/
+
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.site-header {
+    background-color: #000000;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    width: 40px;
+    height: auto;
+}
+
+.main-navigation {
+    display: none;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: #ffa500;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 1.5em 1em;
+    background-image: url('<?php echo get_template_directory_uri(); ?>/images/hero-image.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-section h1 {
+    color: #ffffff;
+    font-size: 1.8em;
+    margin: 0.5em 0;
+}
+
+.hero-buttons .button {
+    background-color: #ffa500;
+    color: #000;
+    padding: 0.5em 1em;
+    margin: 0.5em;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: block;
+    width: 80%;
+    margin: 0.5em auto;
+}
+
+.hero-buttons .button.secondary {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.about-section {
+    text-align: center;
+    margin: 1.5em 1em;
+    color: #ffffff;
+    font-size: 0.9em;
+}
+
+.tournaments-section {
+    padding: 1em;
+    text-align: center;
+    color: #ffffff;
+}
+
+.tournaments-section h2 {
+    color: #ffa500;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+.tournament-card {
+    background-color: #222222;
+    border-radius: 8px;
+    padding: 1em;
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 250px;
+    text-align: left;
+    color: #ffffff;
+}
+
+.tournament-card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.tournament-card h3 {
+    font-size: 1.2em;
+    margin-top: 0.5em;
+}
+
+.tournament-card p {
+    margin: 0.5em 0;
+    color: #cccccc;
+}
+
+.tournament-card button,
+.stream-button {
+    display: block;
+    width: 100%;
+    padding: 0.5em;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+.stream-button {
+    background-color: #1e90ff;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-content {
+    background-color: #000000;
+    text-align: center;
+    padding: 1em;
+}
+
+.footer-navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.footer-navigation a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.footer-content p {
+    color: #777777;
+    font-size: 0.8em;
+    margin-top: 1em;
+}
+
+@media (min-width: 768px) {
+    .main-navigation {
+        display: flex;
+        gap: 1em;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .tournament-card {
+        width: 45%;
+        margin: 1em;
+    }
+
+    .footer-navigation ul {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .tournament-card {
+        width: 30%;
+    }
+}
