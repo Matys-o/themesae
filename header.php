@@ -5,48 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php bloginfo('name'); ?></title>
     <?php wp_head(); ?>
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        .site-header {
+            background-color: #000000;
+            padding: 1em 2em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* Logo */
+        .logo img {
+            height: 40px;
+        }
+
+        /* Navigation */
+        .main-nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .nav-button:hover {
+            box-shadow: 0px 4px 8px rgba(255, 193, 7, 0.8); /* Ombre jaune au survol */
+            background-color: #444;
+        }
+
+        /* Menu burger pour mobile */
+        .menu-burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .menu-burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: #FFC107;
+            border-radius: 2px;
+        }
+
+        /* Styles responsive pour mobile */
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                background-color: #333;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                padding: 1em;
+                border-radius: 8px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+                width: 200px;
+            }
+
+            .main-nav.open {
+                display: flex;
+            }
+
+            .menu-burger {
+                display: flex;
+            }
+
+            .nav-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body <?php body_class(); ?>>
 
-<header style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #000;">
-    
-    <?php // Logo section ?>
-    <div style="flex-shrink: 0;">
-        <a href="<?php echo home_url(); ?>" style="display: inline-block;">
-            <?php // Replace with an actual logo image or site title ?>
-            <img src="<?php echo get_template_directory_uri(); ?>/images/logo nrlt blanc png.png" alt="<?php bloginfo('name'); ?> Logo" style="height: 40px;">
+<header class="site-header">
+    <div class="logo">
+        <a href="<?php echo home_url(); ?>">
+            <img src="<?php echo get_template_directory_uri(); ?>/images/logo nrlt blanc png.png" alt="<?php bloginfo('name'); ?> Logo">
         </a>
     </div>
 
-    <?php // Main navigation ?>
-    <nav style="display: flex; gap: 20px;">
-    <a href="<?php echo home_url(); ?>" style="color: #fff; text-decoration: none; font-weight: bold;">Page d'accueil</a>
-    <a href="<?php echo get_permalink(get_page_by_path('creer-son-tournois')); ?>" style="color: #fff; text-decoration: none; font-weight: bold;">Créer son tournoi</a>
-    <a href="<?php echo get_permalink(get_page_by_path('rejoindre-tournoi')); ?>" style="color: #fff; text-decoration: none; font-weight: bold;">Rejoindre un tournoi</a>
-    <a href="<?php echo get_permalink(get_page_by_path('compte')); ?>" style="color: #fff; text-decoration: none; font-weight: bold;">Compte</a>
-    <a href="<?php echo wp_logout_url(); ?>" style="color: #fff; text-decoration: none; font-weight: bold;">Déconnexion</a>
-</nav>
+    <nav class="main-nav">
+        <a href="<?php echo home_url(); ?>" class="nav-button">Page d'accueil</a>
+        <a href="<?php echo get_permalink(get_page_by_path('creer-son-tournois')); ?>" class="nav-button">Créer son tournoi</a>
+        <a href="<?php echo get_permalink(get_page_by_path('rejoindre-tournoi')); ?>" class="nav-button">Rejoindre un tournoi</a>
+        <a href="<?php echo get_permalink(get_page_by_path('compte')); ?>" class="nav-button">Compte</a>
+        <a href="<?php echo wp_logout_url(); ?>" class="nav-button">Déconnexion</a>
+    </nav>
 
-
-
-
-    <?php // Hamburger icon for mobile ?>
-    <div onclick="toggleMenu()" style="display: none; flex-direction: column; cursor: pointer; width: 24px; height: 24px; justify-content: space-between;">
-        <span style="display: block; height: 2px; background-color: #FFC107; border-radius: 2px;"></span>
-        <span style="display: block; height: 2px; background-color: #FFC107; border-radius: 2px; margin-top: 4px;"></span>
-        <span style="display: block; height: 2px; background-color: #FFC107; border-radius: 2px; margin-top: 4px;"></span>
+    <div class="menu-burger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
-
 </header>
 
 <script>
 function toggleMenu() {
-    var nav = document.querySelector('nav');
-    if (nav.style.display === 'none' || nav.style.display === '') {
-        nav.style.display = 'flex';
-    } else {
-        nav.style.display = 'none';
-    }
+    document.querySelector('.main-nav').classList.toggle('open');
 }
 </script>
 
