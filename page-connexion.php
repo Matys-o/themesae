@@ -35,8 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     $username = sanitize_text_field($_POST['reg_username']);
     $email = sanitize_email($_POST['reg_email']);
     $password = $_POST['reg_password'];
+    $accept_terms = !empty($_POST['accept_terms']);
 
-    if (username_exists($username) || email_exists($email)) {
+    if (!$accept_terms) {
+        $register_error_message = "Vous devez accepter les Conditions Générales d'Utilisation.";
+    } elseif (username_exists($username) || email_exists($email)) {
         $register_error_message = "Le nom d'utilisateur ou l'adresse e-mail est déjà utilisé.";
     } else {
         $user_id = wp_create_user($username, $password, $email);
@@ -44,7 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
         if (is_wp_error($user_id)) {
             $register_error_message = $user_id->get_error_message();
         } else {
-            wp_update_user(['ID' => $user_id, 'role' => 'contributor']);
+            // Attribution du rôle de contributeur
+            wp_update_user(['ID' => $user_id, 'role' => 'contributor']); // Ici, le rôle est défini comme 'contributeur'
             $register_success_message = "Inscription réussie ! Vous pouvez maintenant vous connecter.";
         }
     }
@@ -103,6 +107,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
         <label for="reg_password">Mot de passe :</label>
         <input type="password" id="reg_password" name="reg_password" required>
 
+        <label for="accept_terms">
+            <input type="checkbox" id="accept_terms" name="accept_terms"> J'ai lu et j'accepte les <a href="<?php echo home_url('/conditions-generales-utilisation'); ?>" target="_blank">Conditions Générales d'Utilisation</a>
+        </label>
+
         <button type="submit" class="btn register-button">S'inscrire</button>
     </form>
 </div>
@@ -110,3 +118,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 <?php
 get_footer();
 ob_end_flush();
+?>
