@@ -35,11 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     $username = sanitize_text_field($_POST['reg_username']);
     $email = sanitize_email($_POST['reg_email']);
     $password = $_POST['reg_password'];
-    $accept_terms = !empty($_POST['accept_terms']);
 
-    if (!$accept_terms) {
-        $register_error_message = "Vous devez accepter les Conditions Générales d'Utilisation.";
-    } elseif (username_exists($username) || email_exists($email)) {
+    if (username_exists($username) || email_exists($email)) {
         $register_error_message = "Le nom d'utilisateur ou l'adresse e-mail est déjà utilisé.";
     } else {
         $user_id = wp_create_user($username, $password, $email);
@@ -47,13 +44,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
         if (is_wp_error($user_id)) {
             $register_error_message = $user_id->get_error_message();
         } else {
-            // Attribution du rôle de contributeur
-            wp_update_user(['ID' => $user_id, 'role' => 'contributor']); // Ici, le rôle est défini comme 'contributeur'
+            // Mettre à jour le rôle de l'utilisateur
+            wp_update_user(['ID' => $user_id, 'role' => 'contributor']);
+
+            // Ajouter l'utilisateur au type de contenu "Joueurs"
+            $player_post = array(
+                'post_title'   => $username,
+                'post_content' => '', // Contenu optionnel
+                'post_status'  => 'publish',
+                'post_type'    => 'joueurs',
+            );
+
+            // Insertion de l'article et récupération de l'ID
+            wp_insert_post($player_post);
+
             $register_success_message = "Inscription réussie ! Vous pouvez maintenant vous connecter.";
         }
     }
 }
-
 ?>
 
 <div class="content login-page">
@@ -107,8 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
         <label for="reg_password">Mot de passe :</label>
         <input type="password" id="reg_password" name="reg_password" required>
 
-        <label for="accept_terms">
-            <input type="checkbox" id="accept_terms" name="accept_terms"> J'ai lu et j'accepte les <a href="<?php echo home_url('/conditions-generales-utilisation'); ?>" target="_blank">Conditions Générales d'Utilisation</a>
+        <label>
+            <input type="checkbox" name="accept_cgu" required> J'ai lu et j'accepte les <a href="<?php echo get_permalink(get_page_by_path('conditions-generales-utilisation')); ?>">CGU</a>.
         </label>
 
         <button type="submit" class="btn register-button">S'inscrire</button>
